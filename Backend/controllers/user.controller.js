@@ -34,7 +34,16 @@ async function findUserForUsername(req, res) {
         updatedAt: new Date().toDateString()
       }
       });
-    res.status(200).json({"instanceCreate": created});
+      if(created){
+        res.status(200).json({
+          user,
+          created});
+      }else{
+        res.status(200).json({
+          "exist": !created,
+          created});
+      }
+
     };  
 
 module.exports = {

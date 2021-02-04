@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {userController} = require('../controllers')
+const {userController,loginController} = require('../controllers')
 const {asyncHandler} = require('../middlewares')
 
 router.route('/all')
@@ -12,6 +12,9 @@ router.route('/user')
     .get(asyncHandler(userController.findUserForUsername))    
 
 router.route('/user')
-    .post(asyncHandler(userController.createUser))        
+    .post(asyncHandler(userController.createUser))       
+    
+router.route('/user/login')
+    .post(asyncHandler(loginController.getTokenUser))       
 
 module.exports = router;

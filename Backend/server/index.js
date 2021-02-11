@@ -20,29 +20,4 @@ server.get("/", (req, res) => {
 
 server.use("/", routers);
 
-server.use("/flights", (req, res) => {
-  res.status(200).json([
-    {
-      booking: "w123",
-      schedule: new Date().toDateString(),
-      rate: "1000",
-      origin: "Medellin",
-      destiny: "Cali",
-      freeSeats: 20,   
-      createdAt: new Date().toDateString(),
-      updatedAt: new Date().toDateString()
-    },
-    {
-      booking: "w789",
-      schedule: new Date().toDateString(),
-      rate: "2500",
-      origin: "Medellin",
-      destiny: "Bogota",
-      freeSeats: 15,   
-      createdAt: new Date().toDateString(),
-      updatedAt: new Date().toDateString()
-    }
-  ]);   
-});
-
 module.exports = server;

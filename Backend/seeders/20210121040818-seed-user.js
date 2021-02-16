@@ -15,7 +15,7 @@ module.exports = {
           name: "Laura",
           username: "Laura",
           password: "1234",
-          age: 25,
+          age: 15,
           createdAt: new Date().toDateString(),
           updatedAt: new Date().toDateString()
         }

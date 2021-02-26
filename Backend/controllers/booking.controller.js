@@ -72,13 +72,18 @@ async function CreateBooking(req, res) {
 
   let flight = Flights.filter( f => f.id == idFlight);
 
-  flight.freeSeats = flight.freeSeats-1;
+  flight[0].freeSeats = flight[0].freeSeats-1;
 
   let {id,name,age} = User
   console.log("*************id: "+flight[0].id)
   console.log("*************idUser: "+id)
+
+  let bookingAll = await db.sequelize.models.Booking.findAll()
+
+  let bookingForUser = bookingAll.filter(b => b.user == id);
+
   let [booking,created] = await db.sequelize.models.Booking.findOrCreate({
-    where: { user: id, createdAt: flight[0].schedule}, 
+    where: {id}, 
     defaults: {
       user: id,
       flight: flight[0].id,
@@ -103,7 +108,6 @@ async function CreateBooking(req, res) {
       "exist": !created,
       created});
   }
-
 
   };  
 

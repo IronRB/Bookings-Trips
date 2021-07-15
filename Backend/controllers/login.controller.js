@@ -1,5 +1,6 @@
 const db = require("../models");
 const jwt = require('jsonwebtoken');
+const {PRIVATEKEY} = require("./config");
 
 async function getTokenUser(req, res) {
     let body = req.body;
@@ -25,7 +26,7 @@ async function getTokenUser(req, res) {
     
         let token = jwt.sign({
             user
-        }, '123456',{
+        }, PRIVATEKEY,{
             expiresIn: 60 * 24
         })    
     

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { bookingController } = require('../controllers')
-const {asyncHandler} = require('../middlewares')
+const {asyncHandler,protectedRoutes} = require('../middlewares')
 
 router.route('/all')
     .get(asyncHandler(bookingController.findAll))

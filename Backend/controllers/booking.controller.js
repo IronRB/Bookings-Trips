@@ -1,5 +1,6 @@
 const db = require("../models");
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+const {PRIVATEKEY} = require("../config");
 
 async function findAll(req, res) {
   let Flight = await db.sequelize.models.Booking.findAll();
@@ -28,8 +29,19 @@ async function CreateBooking(req, res) {
          .send({message: "Header authorization invalid"});
   }
     
-  let token = req.headers.authorization;
+  const token = req.headers.authorization;
+
+  if (token) {
+    console.log(PRIVATEKEY)
+    jwt.verify(token, PRIVATEKEY, (err) => {      
+      if (err) {
+        return res.json({ message: 'Invalid Token' });    
+      } 
+    });
+  }
+
   let payload = jwt.decode(token);
+  console.log(payload)
   let idUser = payload.user.id
   let User = await db.sequelize.models.User.findOne({ where: { id: idUser } });
   if (!User) {

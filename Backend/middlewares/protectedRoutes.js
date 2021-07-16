@@ -1,7 +1,8 @@
-const {PRIVATEKEY} = require("./config");
-const protectedRoutes = express.Router(); 
+const {PRIVATEKEY} = require("../config");
+const protectedRoutes = require('express').Router(); 
+
 protectedRoutes.use((req, res, next) => {
-    const token = req.headers['access-token'];
+    const token = req.headers['authorization'];
  
     if (token) {
       jwt.verify(token, PRIVATEKEY, (err, decoded) => {      

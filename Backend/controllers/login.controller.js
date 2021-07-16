@@ -1,6 +1,6 @@
 const db = require("../models");
 const jwt = require('jsonwebtoken');
-const {PRIVATEKEY} = require("./config");
+const {PRIVATEKEY} = require("../config");
 
 async function getTokenUser(req, res) {
     let body = req.body;
